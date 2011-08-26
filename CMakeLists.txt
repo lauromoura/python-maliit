@@ -52,6 +52,16 @@ execute_process(COMMAND pkg-config --variable pluginsdir maliit-plugins-0.80
 
 message(STATUS "Maliit plugins dir: ${MALITT_PLUGINS_DIR}")
 
+set(ARCHIVE_NAME python-maliit-${BINDING_API_VERSION})
+add_custom_target(dist
+    COMMAND mkdir -p "${CMAKE_BINARY_DIR}/${ARCHIVE_NAME}" &&
+            git log > "${CMAKE_BINARY_DIR}/${ARCHIVE_NAME}/ChangeLog" &&
+            git archive --prefix=${ARCHIVE_NAME}/ HEAD --format=tar --output="${CMAKE_BINARY_DIR}/${ARCHIVE_NAME}.tar" &&
+            tar -C "${CMAKE_BINARY_DIR}" --owner=root --group=root -r "${ARCHIVE_NAME}/ChangeLog" -f "${CMAKE_BINARY_DIR}/${ARCHIVE_NAME}.tar" &&
+            bzip2 -f9 "${CMAKE_BINARY_DIR}/${ARCHIVE_NAME}.tar" &&
+            echo "Source package created at ${CMAKE_BINARY_DIR}/${ARCHIVE_NAME}.tar.bz2.\n"
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
 set(GENERATOR_EXTRA_FLAGS --generator-set=shiboken --enable-parent-ctor-heuristic --enable-pyside-extensions --enable-return-value-heuristic --use-isnull-as-nb_nonzero)
 add_subdirectory(maliit)
 add_subdirectory(plugin)
