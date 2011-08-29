@@ -26,6 +26,6 @@ Activet the python example plugin:
 4.
 Now you can run maliit-server and your application.
 
+On a Netbook using MeeGo 1.2 you can use the following line to run the server:
 
-
-
+    maliit-server -bypass-wm-hint
