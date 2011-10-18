@@ -63,6 +63,6 @@ add_custom_target(dist
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
 set(GENERATOR_EXTRA_FLAGS --generator-set=shiboken --enable-parent-ctor-heuristic --enable-pyside-extensions --enable-return-value-heuristic --use-isnull-as-nb_nonzero)
-add_subdirectory(maliit)
+add_subdirectory(maliitplugins)
 add_subdirectory(plugin)
 add_subdirectory(plugin-example)
