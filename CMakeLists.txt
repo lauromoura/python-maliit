@@ -65,4 +65,4 @@ add_custom_target(dist
 set(GENERATOR_EXTRA_FLAGS --generator-set=shiboken --enable-parent-ctor-heuristic --enable-pyside-extensions --enable-return-value-heuristic --use-isnull-as-nb_nonzero)
 add_subdirectory(maliit)
 add_subdirectory(plugin)
-add_subdirectory(plugin-example)
+add_subdirectory(examples)

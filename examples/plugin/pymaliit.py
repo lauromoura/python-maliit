@@ -1,6 +1,9 @@
 from PySide.QtCore import QRect
 from PySide.QtGui import QPushButton, QRegion, qApp
-from maliit import MInputMethodPlugin, MInputMethod, MAbstractInputMethod
+
+import maliit.plugins
+maliit.plugins.require("080")
+from maliit.plugins import MInputMethodPlugin, MInputMethod, MAbstractInputMethod
 
 class PythonKeyboard(MAbstractInputMethod):
     EXAMPLE_SUBVIEW_ID = "ExamplePluginSubview1"

@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+    This file is part of PySide project.
+    Copyright (C) 2009-2011 Nokia Corporation and/or its subsidiary(-ies).
+    Contact: PySide team <contact@pyside.org>
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+-->
+<typesystem package="client">
+    <load-typesystem name="typesystem_templates.xml" generate="no" />
+    <load-typesystem name="typesystem_core.xml" generate="no" />
+
+    <namespace-type name="Maliit" generate="no">
+        <!--<enum-type name="EventRequestType" />
+        <enum-type name="HandlerState" />
+        <enum-type name="InputModeIndicator" />
+        <enum-type name="InputMethodQueryExtensions" />
+        <enum-type name="ActionType" />
+        <enum-type name="ItemType" />
+        <enum-type name="OrientationAngle" />
+        <enum-type name="VisibleType" />
+        <enum-type name="CopyPasteState" />
+        <enum-type name="InputMethodMode" />
+        <enum-type name="TextContentType" />
+        <enum-type name="PreeditFace" />
+        <enum-type name="Orientation" />
+        <enum-type name="SwitchDirection" />
+        <value-type name="PreeditTextFormat" />
+        -->
+        <!-- enums from namespace.h -->
+        <enum-type name="OrientationAngle" />
+        <enum-type name="Orientation" />
+        <enum-type name="ItemType" />
+        <enum-type name="VisibleType" />
+        <enum-type name="ActionType" />
+        <enum-type name="CopyPasteState" />
+        <enum-type name="SwitchDirection" />
+        <enum-type name="PreeditFace" />
+        <enum-type name="HandlerState" />
+        <enum-type name="EventRequestType" />
+        <enum-type name="InputModeIndicator" />
+        <enum-type name="InputMethodMode" />
+
+        <namespace-type name="InputMethodQuery" generate="yes">
+            <!-- Rejected fields as currently there's no support for
+                 namespace-level fields -->
+            <rejection class="*" field-name="correctionEnabledQuery" />
+            <rejection class="*" field-name="attributeExtensionId" />
+            <rejection class="*" field-name="attributeExtension" />
+
+            <add-function signature="getCorrectionEnabledQuery()" return-type="QString">
+                <inject-code class="target" position="beginning">
+                    %PYARG_0 = %CONVERTTOPYTHON[QString](Maliit::InputMethodQuery::correctionEnabledQuery);
+                </inject-code>
+            </add-function>
+
+            <add-function signature="getAttributeExtensionId()" return-type="QString">
+                <inject-code class="target" position="beginning">
+                    %PYARG_0 = %CONVERTTOPYTHON[QString](Maliit::InputMethodQuery::attributeExtensionId);
+                </inject-code>
+            </add-function>
+
+            <add-function signature="getAttributeExtension()" return-type="QString">
+                <inject-code class="target" position="beginning">
+                    %PYARG_0 = %CONVERTTOPYTHON[QString](Maliit::InputMethodQuery::attributeExtension);
+                </inject-code>
+            </add-function>
+
+        </namespace-type>
+
+        <!-- Classes from libmaliit -->
+        <object-type name="AttributeExtension">
+        </object-type>
+        <object-type name="InputMethod">
+        </object-type>
+        <object-type name="PreeditInjectionEvent">
+        </object-type>
+    </namespace-type>
+</typesystem>
+

@@ -34,7 +34,7 @@ namespace {
         Shiboken::GilState pyGil;
 
         // Get the plugin base type to check the classes from the imported module
-        PyObject* maliitModule = Shiboken::Module::import("maliit");
+        PyObject* maliitModule = Shiboken::Module::import("maliitplugins");
         if (!maliitModule) {
             qWarning() << "Failed to import maliit python plugin module";
             return 0;
