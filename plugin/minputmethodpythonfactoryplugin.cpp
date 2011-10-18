@@ -20,8 +20,6 @@
 #include <QFileInfo>
 #include <QDebug>
 
-PyTypeObject** SbkmaliitTypes;
-
 namespace {
     MInputMethodPlugin *loadPythonFile(const QString &pythonFile)
     {
@@ -35,10 +33,16 @@ namespace {
         Shiboken::init();
         Shiboken::GilState pyGil;
 
-        Shiboken::importModule("maliit", &SbkmaliitTypes);
+        // Get the plugin base type to check the classes from the imported module
+        PyObject* maliitModule = Shiboken::Module::import("maliit");
+        if (!maliitModule) {
+            qWarning() << "Failed to import maliit python plugin module";
+            return 0;
+        }
         Shiboken::TypeResolver* sbkType = Shiboken::TypeResolver::get("MInputMethodPlugin*");
         if (!sbkType) {
             qWarning() << "Plugin type not found.";
+            Py_DECREF(maliitModule);
             return 0;
         }
         PyObject *pluginType = reinterpret_cast<PyObject*>(sbkType->pythonType());
@@ -55,11 +59,12 @@ namespace {
         Py_DECREF(path);
 
         fromlist = PyTuple_New(0);
-        qDebug() << "PATH" <<  pythonFile << "name" << pluginPath.baseName();
         module = PyImport_ImportModuleEx(const_cast<char*>(qPrintable(pluginPath.baseName())), mainLocals, mainLocals, fromlist);
         Py_DECREF(fromlist);
         if (!module) {
             PyErr_Print();
+            Py_DECREF(mainModule);
+            Py_DECREF(maliitModule);
             return 0;
         }
 
@@ -95,6 +100,7 @@ namespace {
         Q_ASSERT(pluginObject);
         Py_DECREF(mainModule);
         Py_DECREF(module);
+        Py_DECREF(maliitModule);
 
         return pluginObject;
     }
