@@ -1,0 +1,17 @@
+Preprocess file: "/tmp/qt_temp.J11830" 
+Generating class model...                    [[0;32mOK[0m]
+Generating enum model...                     [[1;33mWARNING[0m]
+	enum 'PM_CbaIconHeight' does not have a type entry or is not an enum
+	enum 'SP_CustomTabVideos' does not have a type entry or is not an enum
+	
+
+Generating namespace model...                [[0;32mOK[0m]
+Resolving typedefs...                        [[0;32mOK[0m]
+Fixing class inheritance...                  [[0;32mOK[0m]
+Detecting inconsistencies in class model...  [[0;32mOK[0m]
+[[0;32mOK[0m]
+	type 'QPyTextObject' is specified in typesystem, but not defined. This could potentially lead to compilation errors.
+	
+
+
+Done, 3 warnings (962 known issues)
